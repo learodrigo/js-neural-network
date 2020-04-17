@@ -1,0 +1,25 @@
+// Youtube
+https://www.youtube.com/playlist?list=PLRqwX-V7Uu6aCibgK1PTWWu9by6XFdCfh
+https://www.youtube.com/watch?v=ntKn5TPHHAk
+https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
+
+// Books
+https://natureofcode.com/book/chapter-10-neural-networks/
+https://www.amazon.com/Make-Your-Own-Neural-Network-ebook/dp/B01EER4Z4G/ref=as_li_ss_tl?ie=UTF8&qid=1498492463&sr=8-1&keywords=make+your+own+neural+network&linkCode=sl1&tag=natureofcode-20&linkId=0d10fdc485d6452bb7fc2b62ab4ffd31
+
+// Reading
+https://en.wikipedia.org/wiki/Perceptron
+https://towardsdatascience.com/linear-algebra-cheat-sheet-for-deep-learning-cd67aba4526c
+https://en.wikipedia.org/wiki/Hadamard_product_(matrices)
+https://en.wikipedia.org/wiki/Feedforward_neural_network
+https://en.wikipedia.org/wiki/Sigmoid_function
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/exp
+
+// Repos
+https://github.com/shiffman/Neural-Network-p5
+https://github.com/CodingTrain/Toy-Neural-Network-JS/
+https://github.com/nature-of-code/NOC-S17-2-Intelligence-Learning/tree/master/week4-neural-networks
+
+// Libs example
+https://mathjs.org/
+http://gpu.rocks/

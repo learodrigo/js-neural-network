@@ -2,6 +2,8 @@
 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6aCibgK1PTWWu9by6XFdCfh
 https://www.youtube.com/watch?v=ntKn5TPHHAk
 https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
+https://www.youtube.com/watch?v=L-Lsfu4ab74
+https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
 
 // Books
 https://natureofcode.com/book/chapter-10-neural-networks/
@@ -9,16 +11,23 @@ https://www.amazon.com/Make-Your-Own-Neural-Network-ebook/dp/B01EER4Z4G/ref=as_l
 
 // Reading
 https://en.wikipedia.org/wiki/Perceptron
-https://towardsdatascience.com/linear-algebra-cheat-sheet-for-deep-learning-cd67aba4526c
 https://en.wikipedia.org/wiki/Hadamard_product_(matrices)
 https://en.wikipedia.org/wiki/Feedforward_neural_network
 https://en.wikipedia.org/wiki/Sigmoid_function
+https://en.wikipedia.org/wiki/Stochastic_gradient_descent
+https://en.wikipedia.org/wiki/Backpropagation
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/exp
+https://towardsdatascience.com/linear-algebra-cheat-sheet-for-deep-learning-cd67aba4526c
+https://ml4a.github.io/ml4a/neural_networks/
+https://ml4a.github.io/ml4a/looking_inside_neural_nets/
+https://ml4a.github.io/ml4a/how_neural_networks_are_trained/
 
 // Repos
 https://github.com/shiffman/Neural-Network-p5
 https://github.com/CodingTrain/Toy-Neural-Network-JS/
 https://github.com/nature-of-code/NOC-S17-2-Intelligence-Learning/tree/master/week4-neural-networks
+https://github.com/ml4a
+http://matrixmultiplication.xyz/
 
 // Libs example
 https://mathjs.org/

@@ -7,20 +7,20 @@ the Youtube's playlist with the same name made by [Daniel Shiffman](https://www.
 ## Table of Contents
 
 - [References](#references)
-- [REAMDE](#reamde)
+- [README.md](#readme.md)
 - [License](#license)
 
 ## References
 
 - **Youtube**
-- 10: Neural Networks - The Nature of Code - https://www.youtube.com/playlist?list=PLRqwX-V7Uu6aCibgK1PTWWu9by6XFdCfh
-- Essence of linear algebra - https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
-- Neural Networks - https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
-- Gradient descent, how neural networks learn - https://www.youtube.com/watch?v=IHZwWFHWa-w
-- Linear Regression with Gradient Descent - https://www.youtube.com/watch?v=L-Lsfu4ab74
+- [10: Neural Networks - The Nature of Code](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6aCibgK1PTWWu9by6XFdCfh)
+- [Essence of linear algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab)
+- [Neural Networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)
+- [Gradient descent, how neural networks learn](https://www.youtube.com/watch?v=IHZwWFHWa-w)
+- [Linear Regression with Gradient Descent](https://www.youtube.com/watch?v=L-Lsfu4ab74)
 - **Books**
-- The Nature of Code book - https://natureofcode.com/
-- Make Your Own Neural Network - https://www.amazon.com/Make-Your-Own-Neural-Network-ebook/dp/B01EER4Z4G/ref=as_li_ss_tl?ie=UTF8&qid=1498492463&sr=8-1&keywords=make+your+own+neural+network&linkCode=sl1&tag=natureofcode-20&linkId=0d10fdc485d6452bb7fc2b62ab4ffd31
+- [The Nature of Code book](https://natureofcode.com/)
+- [Make Your Own Neural Network](https://www.amazon.com/Make-Your-Own-Neural-Network-ebook/dp/B01EER4Z4G/ref=as_li_ss_tl?ie=UTF8&qid=1498492463&sr=8-1&keywords=make+your+own+neural+network&linkCode=sl1&tag=natureofcode-20&linkId=0d10fdc485d6452bb7fc2b62ab4ffd31)
 - **Reading**
 - https://en.wikipedia.org/wiki/Perceptron
 - https://en.wikipedia.org/wiki/Hadamard_product_(matrices)
@@ -44,9 +44,9 @@ http://matrixmultiplication.xyz/
 - http://gpu.rocks/
 - https://www.tensorflow.org/js/
 
-## REAMDE
+## README.md
 
-This README.md file was made with [REAMDE Boilerplat](https://github.com/fraction/readme-boilerplate) and [Basic writing and formatting syntax](https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax)
+This README.md file was made with [REAMDE Boilerplate](https://github.com/fraction/readme-boilerplate) and [Basic writing and formatting syntax](https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

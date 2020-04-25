@@ -20,19 +20,19 @@ let training_data = [
 
 function setup () {
   createCanvas(200, 200);
+  testing();
+}
+
+function testing () {
   let nn = new NeuralNetwork(2, 2, 1);
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 50000; i++) {
     let data = random(training_data);
     nn.train(data.inputs, data.target);
   }
 
-  console.log(nn.feedForward([0, 0]));
-  console.log(nn.feedForward([0, 1]));
-  console.log(nn.feedForward([1, 0]));
-  console.log(nn.feedForward([1, 1]));
-}
-
-function draw () {
-  background(51);
+  console.log(nn.predict([0, 0]));
+  console.log(nn.predict([0, 1]));
+  console.log(nn.predict([1, 0]));
+  console.log(nn.predict([1, 1]));
 }

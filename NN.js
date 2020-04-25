@@ -7,6 +7,24 @@
  *
  */
 
+// Other techniques for learning
+class ActivationFunction {
+  constructor (func, dfunc) {
+    this.func = func;
+    this.dfunc = dfunc;
+  }
+}
+
+let sigmoid = new ActivationFunction (
+  x => 1 / (1 + Math.exp(-x)),
+  y => y * (1 - y)
+);
+
+let tanh = new ActivationFunction (
+  x => Math.tanh(x),
+  y => 1 - (y * y)
+);
+
 class NeuralNetwork {
   constructor (inputs_nodes, hidden_nodes, outputs_nodes) {
     this.inputs_nodes = inputs_nodes;
@@ -24,35 +42,51 @@ class NeuralNetwork {
     this.bias_o.randomize();
 
     this.learning_rate = 0.1;
+    this.setActivationFunction();
+  }
+
+  setLearningRate (learning_rate = 0.1) {
+    this.learning_rate = learning_rate;
+  }
+
+  setActivationFunction () {
+    this.activation_function = sigmoid;
+  }
+
+  // Adding function for neuro-evolution
+  copy () {
+    return new NeuralNetwork(this);
   }
 
   // The information moves in only one direction, forward, from the input nodes, through the hidden nodes (if any) and to the output nodes.
-  feedForward (input_array) {
+  predict (input_array) {
     // Genereting hidden outputs
     let inputs = Matrix.fromArray(input_array);
     let hidden = Matrix.multiply(this.weights_ih, inputs);
     hidden.add(this.bias_h);
 
     // Activation function aka Sigmoid function
-    hidden.map(this.sigmoidFunction);
+    hidden.map(this.activation_function.func);
 
     // Generating the outputs
     let output = Matrix.multiply(this.weights_ho, hidden);
     output.add(this.bias_o);
-    output.map(this.sigmoidFunction);
+    output.map(this.activation_function.func);
 
     // Returning
     return output.toArray();
   }
 
-  // Check reference about Sigmoid function
-  sigmoidFunction (x) {
-    return 1 / (1 + Math.exp(-x));
+  // Accept an arbitrary function for mutation
+  mutate (funk) {
+    this.weights_ih.map(funk);
+    this.weights_ho.map(funk);
+    this.bias_h.map(funk);
+    this.bias_o.map(funk);
   }
 
-  // Derivative of Sigmoid
-  dsigmoid (x) {
-    return x - (1 - x)
+  serialize () {
+    return JSON.stringify(this);
   }
 
   // Train brain function
@@ -66,12 +100,12 @@ class NeuralNetwork {
     hidden.add(this.bias_h);
 
     // Activation function aka Sigmoid function
-    hidden.map(this.sigmoidFunction);
+    hidden.map(this.activation_function.func);
 
     // Generating the outputs
     let output = Matrix.multiply(this.weights_ho, hidden);
     output.add(this.bias_o);
-    output.map(this.sigmoidFunction);
+    output.map(this.activation_function.func);
 
     // Converting array to Matrix object
     let targets = Matrix.fromArray(target_array);
@@ -80,7 +114,7 @@ class NeuralNetwork {
     let output_errors = Matrix.subtract(targets, output);
 
     // Calculate gradient
-    let gradients = Matrix.map(output, this.dsigmoid);
+    let gradients = Matrix.map(output, this.activation_function.dfunc);
     gradients.multiply(output_errors);
     gradients.multiply(this.learning_rate);
 
@@ -98,7 +132,7 @@ class NeuralNetwork {
     let hidden_errors = Matrix.multiply(weights_ho_transpose, output_errors);
 
     // Calculate hidden gradients
-    let hidden_gradient = Matrix.map(hidden, this.dsigmoid);
+    let hidden_gradient = Matrix.map(hidden, this.activation_function.dfunc);
     hidden_gradient.multiply(hidden_errors);
     hidden_gradient.multiply(this.learning_rate);
 
@@ -110,5 +144,19 @@ class NeuralNetwork {
     this.weights_ih.add(weights_ih_deltas);
     // Adjust the bias by its deltas (gradients)
     this.bias_h.add(hidden_gradient);
+  }
+
+  /**
+   * Static functions
+   */
+  static deserialize (data) {
+    if (typeof data == 'string') data = JSON.parse(data);
+    let nn = new NeuralNetwork(data.input_nodes, data.hidden_nodes, data.output_nodes);
+    nn.weights_ih = Matrix.deserialize(data.weights_ih);
+    nn.weights_ho = Matrix.deserialize(data.weights_ho);
+    nn.bias_h = Matrix.deserialize(data.bias_h);
+    nn.bias_o = Matrix.deserialize(data.bias_o);
+    nn.learning_rate = data.learning_rate;
+    return nn;
   }
 }

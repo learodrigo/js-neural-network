@@ -25,23 +25,45 @@ let tanh = new ActivationFunction (
   y => 1 - (y * y)
 );
 
+let tanh = new ActivationFunction (
+  x => Math.tanh(x),
+  y => 1 - (y * y)
+);
+
 class NeuralNetwork {
-  constructor (inputs_nodes, hidden_nodes, outputs_nodes) {
-    this.inputs_nodes = inputs_nodes;
-    this.hidden_nodes = hidden_nodes;
-    this.outputs_nodes = outputs_nodes;
+  /*
+  * if first argument is a NeuralNetwork the constructor clones it
+  * USAGE: cloned_nn = new NeuralNetwork(to_clone_nn);
+  */
+  constructor(inputs_nodes, hidden_nodes, outputs_nodes) {
+    if (inputs_nodes instanceof NeuralNetwork) {
+      let a = inputs_nodes;
+      this.input_nodes = a.input_nodes;
+      this.hidden_nodes = a.hidden_nodes;
+      this.output_nodes = a.output_nodes;
 
-    this.weights_ih = new Matrix(this.hidden_nodes, this.inputs_nodes);
-    this.weights_ho = new Matrix(this.outputs_nodes, this.hidden_nodes);
-    this.weights_ih.randomize();
-    this.weights_ho.randomize();
+      this.weights_ih = a.weights_ih.copy();
+      this.weights_ho = a.weights_ho.copy();
 
-    this.bias_h = new Matrix(this.hidden_nodes, 1);
-    this.bias_o = new Matrix(this.outputs_nodes, 1);
-    this.bias_h.randomize();
-    this.bias_o.randomize();
+      this.bias_h = a.bias_h.copy();
+      this.bias_o = a.bias_o.copy();
+    } else {
+      this.input_nodes = inputs_nodes;
+      this.hidden_nodes = hidden_nodes;
+      this.output_nodes = outputs_nodes;
 
-    this.learning_rate = 0.1;
+      this.weights_ih = new Matrix(this.hidden_nodes, this.input_nodes);
+      this.weights_ho = new Matrix(this.output_nodes, this.hidden_nodes);
+      this.weights_ih.randomize();
+      this.weights_ho.randomize();
+
+      this.bias_h = new Matrix(this.hidden_nodes, 1);
+      this.bias_o = new Matrix(this.output_nodes, 1);
+      this.bias_h.randomize();
+      this.bias_o.randomize();
+    }
+
+    this.setLearningRate();
     this.setActivationFunction();
   }
 
@@ -93,7 +115,6 @@ class NeuralNetwork {
   // TODO: Make train to allow several layer for calculating the errors
   // for hidden_errors should be a recursive function to reach layer 0
   train (input_array, target_array) {
-    // Duplicate
     // Genereting hidden outputs
     let inputs = Matrix.fromArray(input_array);
     let hidden = Matrix.multiply(this.weights_ih, inputs);
@@ -103,18 +124,18 @@ class NeuralNetwork {
     hidden.map(this.activation_function.func);
 
     // Generating the outputs
-    let output = Matrix.multiply(this.weights_ho, hidden);
-    output.add(this.bias_o);
-    output.map(this.activation_function.func);
+    let outputs = Matrix.multiply(this.weights_ho, hidden);
+    outputs.add(this.bias_o);
+    outputs.map(this.activation_function.func);
 
     // Converting array to Matrix object
     let targets = Matrix.fromArray(target_array);
 
     // Calculate the error
-    let output_errors = Matrix.subtract(targets, output);
+    let output_errors = Matrix.subtract(targets, outputs);
 
     // Calculate gradient
-    let gradients = Matrix.map(output, this.activation_function.dfunc);
+    let gradients = Matrix.map(outputs, this.activation_function.dfunc);
     gradients.multiply(output_errors);
     gradients.multiply(this.learning_rate);
 

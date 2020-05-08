@@ -1,23 +1,23 @@
 // Small lib to "just a kind of understanding how matrices work"
 
 class Matrix {
-  constructor (rows = 2, cols = 2) {
+  constructor (rows, cols) {
     this.rows = rows;
     this.cols = cols;
     // Initializing matrix data with zeros
-    this.data = new Array(this.rows).fill(0).map(() => new Array(this.cols).fill(0));
+    this.data = Array(this.rows).fill().map(() => Array(this.cols).fill(0));
   }
 
   // Adds either a number or a matrix
   add (n) {
     if (n instanceof Matrix) {
-      // Matrix plus matrix
-      if (this.rows === n.rows || this.cols === n.cols) {
-        return this.map((e, i, j) => e + n.data[i][j]);
-      }
       // Handling error
-      console.error('add - Rows or cols are not equal');
-      return undefined;
+      if (this.rows !== n.rows || this.cols !== n.cols) {
+        console.error('add - Rows or cols from A are not equal to B');
+        return;
+      }
+      // Matrix plus matrix
+      return this.map((e, i, j) => e + n.data[i][j]);
     // Else - Normal sum
     } else {
       return this.map(e => e + n);
@@ -50,13 +50,13 @@ class Matrix {
   multiply (n) {
     // Handling error
     if (n instanceof Matrix) {
-      if (this.rows === n.rows || this.cols === n.cols) {
-        // hadamard product
-        return this.map((e, i, j) => e * n.data[i][j]);
-      }
       // Handling error
-      console.error('multiply - Ups, try to use static multiply function instead');
-      return undefined;
+      if (this.rows !== n.rows || this.cols !== n.cols) {
+        console.error('Rows and cols from A are not equal to B');
+        return;
+      }
+      // hadamard product
+      return this.map((e, i, j) => e * n.data[i][j]);
     // Scalar product
     } else {
       return this.map(e => e * n);
@@ -115,25 +115,27 @@ class Matrix {
   static multiply (a, b) {
     if (a instanceof Matrix && b instanceof Matrix) {
       // Hadamard product
-      if (a.cols === b.rows) {
-        // Temporal variable
-        return new Matrix(a.rows, b.cols)
-          .map((e, i, j) => {
-            // Dot product of values in col
-            let sum = 0;
-            for (let k = 0; k < a.cols; k++) {
-              sum += a.data[i][k] * b.data[k][j];
-            }
-            return sum;
-          });
+      if (a.cols !== b.rows) {
+        // Matrices haven't same format
+        console.error('static multiply - Columns of A must match rows of B');
+        return;
       }
-      // Matrices haven't same format
-      console.error('static multiply - Columns of A must match rows of B');
-      return undefined;
+
+      // Temporal variable
+      return new Matrix(a.rows, b.cols)
+        .map((e, i, j) => {
+          // Dot product of values in col
+          let sum = 0;
+          for (let k = 0; k < a.cols; k++) {
+            sum += a.data[i][k] * b.data[k][j];
+          }
+          return sum;
+        });
+
     // Given params aren't Matrix object
     } else {
-      console.error('static multiply - Looks like the inputs are not matrices. Check them out or use the matrix method multiply');
-      return undefined;
+      console.error('Looks like the inputs you are trying to multuply are not matrices. Check them out');
+      return;
     }
   }
 
@@ -142,18 +144,18 @@ class Matrix {
     // Handling format error
     if (a instanceof Matrix && b instanceof Matrix) {
       // Checking given matrices format
-      if (a.rows === b.rows || a.cols === b.cols) {
-        // Temporal variable
-        return new Matrix(a.rows, a.cols)
-          .map((_, i, j) => a.data[i][j] - b.data[i][j]);
+      if (a.rows !== b.rows || a.cols !== b.cols) {
+        // Matrices haven't same format
+        console.error('static subtract - Columns of A must match rows of B');
+        return;
       }
-      // Matrices haven't same format
-      console.error('static subtract - Columns of A must match rows of B');
-      return undefined;
+      // Temporal variable
+      return new Matrix(a.rows, a.cols)
+        .map((_, i, j) => a.data[i][j] - b.data[i][j]);
     // Given params aren't Matrix object
     } else {
-      console.error('static subtract - Looks like they aren\'t a matrix');
-      return undefined;
+      console.error('Looks like the parameters you are trying to subtract are not matrices');
+      return;
     }
   }
 

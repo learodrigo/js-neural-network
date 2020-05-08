@@ -134,7 +134,7 @@ class Matrix {
 
     // Given params aren't Matrix object
     } else {
-      console.error('Looks like the inputs you are trying to multuply are not matrices. Check them out');
+      console.error('static multiply - Looks like the inputs you are trying to multuply are not matrices. Check them out');
       return;
     }
   }

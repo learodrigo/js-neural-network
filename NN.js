@@ -25,11 +25,6 @@ let tanh = new ActivationFunction (
   y => 1 - (y * y)
 );
 
-let tanh = new ActivationFunction (
-  x => Math.tanh(x),
-  y => 1 - (y * y)
-);
-
 class NeuralNetwork {
   /*
   * if first argument is a NeuralNetwork the constructor clones it
@@ -47,6 +42,7 @@ class NeuralNetwork {
 
       this.bias_h = a.bias_h.copy();
       this.bias_o = a.bias_o.copy();
+
     } else {
       this.input_nodes = inputs_nodes;
       this.hidden_nodes = hidden_nodes;
